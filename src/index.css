@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Nunito', sans-serif;
+  color: #fff;
+  font-size: 20px;
+}
+
+body {
+  background-color: #333;
+  height: 100vh;
+}
+
+header,
+footer {
+  background-color: #000;
+  position: fixed;
+  font-weight: bold;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  max-height: 2rem;
+}
+
+header {
+  top: 0;
+}
+footer {
+  bottom: 0;
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+a,
+a:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  background-color: #333;
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+}
+
+article {
+  background-color: #000;
+  border-radius: 0.5rem;
+  margin: 20px;
+}
+
+.questionSet {
+  padding: 1rem;
+  background-color: grey;
+  color: black;
+  border-bottom: 2px solid #fff;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+}
+
+.answerSet {
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.mainAnswer {
+  padding: 1rem;
+}
+
+.helpers {
+  padding: 0.4rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid #fff;
+}
+
+form {
+  margin-inline: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+textarea,
+button {
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+textarea {
+  font-size: 35px;
+}
+label,
+button {
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+button {
+  padding: 0.5rem;
+  margin-top: 1rem;
+  font-size: 15px;
+}
+.formHelpers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+input {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+.formHelpers input {
+  margin-left: 0.5rem;
+}
