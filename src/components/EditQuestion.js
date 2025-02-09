@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
 import axios from '../api/axios';
-import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleQuestion,
@@ -10,25 +10,26 @@ import {
   faCircleChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
 
-const AddQuestion = ({ questionsList, setQuestionsList }) => {
+const EditQuestion = ({ questionsList, setQuestionsList }) => {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const quesRef = useRef();
 
-  const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState('');
-  const [codeSnippet, setCodeSnippet] = useState('');
-  const [domain, setDomain] = useState('');
-  const [referenceUrl, setReferenceUrl] = useState('');
+  const singleQuestion = questionsList?.find((question) => question._id === id);
 
-  useEffect(() => {
-    quesRef.current.focus();
-  });
+  const [question, setQuestion] = useState(singleQuestion?.question);
+  const [answer, setAnswer] = useState(singleQuestion?.answer);
+  const [codeSnippet, setCodeSnippet] = useState(singleQuestion?.codeSnippet);
+  const [domain, setDomain] = useState(singleQuestion?.domain);
+  const [referenceUrl, setReferenceUrl] = useState(
+    singleQuestion?.referenceUrl
+  );
 
-  const handleSubmit = async (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault();
 
     if (question && answer) {
-      const newQuestion = {
+      const updatedQuestion = {
+        id: id,
         question: question,
         answer: answer,
         codeSnippet: codeSnippet,
@@ -37,7 +38,7 @@ const AddQuestion = ({ questionsList, setQuestionsList }) => {
         timeStamp: new Date().toISOString(),
       };
       try {
-        const response = await axios.post('questions', newQuestion);
+        const response = await axios.put('questions', updatedQuestion);
         console.log(response.data);
         console.log(response);
         setQuestion('');
@@ -45,11 +46,14 @@ const AddQuestion = ({ questionsList, setQuestionsList }) => {
         setCodeSnippet('');
         setDomain('');
         setReferenceUrl('');
-        const newQuestionList = [...questionsList, response.data];
-        setQuestionsList(newQuestionList);
-        navigate('/');
+        const filteredList = questionsList.filter(
+          (question) => question._id !== id
+        );
+        setQuestionsList([...filteredList, response.data]);
+        navigate(`/question/${id}`);
       } catch (err) {
-        console.log(err.response?.data);
+        console.log(err.response?.data?.message);
+        alert(err.response?.data?.message);
       }
     }
   };
@@ -61,8 +65,7 @@ const AddQuestion = ({ questionsList, setQuestionsList }) => {
           <FontAwesomeIcon icon={faCircleQuestion} /> Question:
         </label>
         <input
-          ref={quesRef}
-          placeholder='Question'
+          placeholder='Type Question'
           type='text'
           required
           value={question}
@@ -82,6 +85,7 @@ const AddQuestion = ({ questionsList, setQuestionsList }) => {
           <FontAwesomeIcon icon={faCode} /> Code Snippet:
         </label>
         <textarea
+          placeholder='Please type a code snippet if any'
           name='codeSnippet'
           id='codeSnippet'
           value={codeSnippet}
@@ -111,12 +115,11 @@ const AddQuestion = ({ questionsList, setQuestionsList }) => {
             />
           </div>
         </div>
-        <button type='submit' onClick={(e) => handleSubmit(e)}>
-          Add Question
+        <button type='submit' onClick={(e) => handleEdit(e)}>
+          Update Question
         </button>
       </form>
     </section>
   );
 };
-
-export default AddQuestion;
+export default EditQuestion;

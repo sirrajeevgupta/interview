@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import QuestionsList from './components/QuestionsList';
 import AddQuestion from './components/AddQuestion';
-import UpdateQuestion from './components/UpdateQuestion';
+import EditQuestion from './components/EditQuestion';
 import SingleQuestion from './components/SingleQuestion';
 import Missing from './components/Missing';
 import Layout from './components/Layout';
@@ -35,10 +35,31 @@ function App() {
         <Route path='question'>
           <Route
             index
-            element={<AddQuestion questionsList={questionsList} />}
+            element={
+              <AddQuestion
+                questionsList={questionsList}
+                setQuestionsList={setQuestionsList}
+              />
+            }
           />
-          <Route path=':questionId' element={<SingleQuestion />} />
-          <Route path='edit/:questionId' element={<UpdateQuestion />} />
+          <Route
+            path=':id'
+            element={
+              <SingleQuestion
+                questionsList={questionsList}
+                setQuestionsList={setQuestionsList}
+              />
+            }
+          />
+          <Route
+            path='edit/:id'
+            element={
+              <EditQuestion
+                questionsList={questionsList}
+                setQuestionsList={setQuestionsList}
+              />
+            }
+          />
         </Route>
       </Route>
       <Route path='*' element={<Missing />} />

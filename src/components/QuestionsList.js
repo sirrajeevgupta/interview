@@ -1,7 +1,19 @@
+import { formatDistanceToNow, parseISO } from 'date-fns';
 import { Link } from 'react-router-dom';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCircleQuestion,
+  faComment,
+  faLink,
+} from '@fortawesome/free-solid-svg-icons';
 
 const QuestionsList = ({ questionsList }) => {
-  const list = questionsList;
+  const orderedList = questionsList
+    .slice()
+    .sort((a, b) => b.timeStamp.localeCompare(a.timeStamp));
+  const list = orderedList;
 
   return (
     <section>
@@ -10,20 +22,60 @@ const QuestionsList = ({ questionsList }) => {
           {list.map((question) => {
             return (
               <li key={question?._id}>
-                <article>
+                <article key={question?._id}>
                   <div className='questionSet'>
-                    <Link to={`/questions/${question._id}`}>
-                      <h3>{question?.question}</h3>
+                    <Link to={`/question/${question._id}`}>
+                      <h3>
+                        <FontAwesomeIcon icon={faCircleQuestion} />{' '}
+                        {question?.question}
+                      </h3>
                     </Link>
                   </div>
                   <div className='answerSet'>
                     <div className='mainAnswer'>
-                      <p>{question?.answer}</p>
-                      <p>{question.codeSnippet}</p>
+                      <p>
+                        <FontAwesomeIcon icon={faComment} /> {question?.answer}
+                      </p>
+                      <div
+                        className={`snippet ${
+                          question?.codeSnippet?.length
+                            ? 'visible'
+                            : 'hideSnippet'
+                        }`}
+                      >
+                        <Link to={`/question/${question._id}`}>
+                          <SyntaxHighlighter
+                            language='javascript'
+                            style={atomDark}
+                            wrapLines={true}
+                            customStyle={{
+                              backgroundColor: '#082c08',
+                              margin: 0,
+                              borderRadius: '0.5rem',
+                            }}
+                          >
+                            {`<Code Snippet Available>`}
+                          </SyntaxHighlighter>
+                        </Link>
+                      </div>
                     </div>
                     <div className='helpers'>
+                      <p>
+                        <i>
+                          {question?.timeStamp
+                            ? `${formatDistanceToNow(
+                                parseISO(question?.timeStamp)
+                              )} ago`
+                            : ''}
+                        </i>
+                      </p>
                       <p>{question.domain}</p>
-                      <p>{question.referenceUrl}</p>
+                      <p>
+                        <FontAwesomeIcon icon={faLink} />{' '}
+                        {question.referenceUrl
+                          ? question.referenceUrl
+                          : 'No Reference'}
+                      </p>
                     </div>
                   </div>
                 </article>

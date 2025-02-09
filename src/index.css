@@ -9,7 +9,7 @@
 html {
   font-family: 'Nunito', sans-serif;
   color: #fff;
-  font-size: 20px;
+  font-size: 17px;
 }
 
 body {
@@ -101,6 +101,7 @@ article {
 }
 
 .helpers {
+  font-size: 0.7rem;
   padding: 0.4rem 1rem;
   display: flex;
   justify-content: space-between;
@@ -151,4 +152,42 @@ input {
 }
 .formHelpers input {
   margin-left: 0.5rem;
+}
+
+.snippet {
+  margin: 1.5rem 2rem 1rem 2rem;
+  font-size: 12px;
+  border: 1px solid #fff;
+  border-radius: 0.5rem;
+  color: #fff;
+  background-color: rgb(29, 31, 33);
+}
+
+.visible {
+  display: block;
+}
+.hideSnippet {
+  display: none;
+}
+
+article ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+article ul li {
+  padding: 0.5rem 1rem;
+}
+article button {
+  margin-top: 0.2rem;
+}
+article button:hover {
+  border: 2px solid #dadada;
+  border-radius: 7px;
+  box-shadow: 0 0 10px #9ecaed;
+}
+article button:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
 }
