@@ -3,10 +3,10 @@ import Footer from './Footer';
 
 import { Outlet } from 'react-router-dom';
 
-const Layout = () => {
+const Layout = ({ search, setSearch }) => {
   return (
     <>
-      <Header />
+      <Header search={search} setSearch={setSearch} />
       <main className='App'>
         <Outlet />
       </main>

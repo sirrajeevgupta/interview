@@ -32,6 +32,7 @@ footer {
 
 header {
   top: 0;
+  min-height: 3rem;
 }
 footer {
   bottom: 0;
@@ -44,6 +45,9 @@ nav {
   align-items: center;
 }
 
+nav input {
+  width: 40%;
+}
 nav ul {
   width: 100%;
   display: flex;
@@ -79,11 +83,11 @@ section {
 article {
   background-color: #000;
   border-radius: 0.5rem;
-  margin: 20px;
+  margin: 23px 20px;
 }
 
 .questionSet {
-  padding: 1rem;
+  padding: 0.6rem;
   background-color: grey;
   color: black;
   border-bottom: 2px solid #fff;
@@ -144,13 +148,15 @@ button {
   align-items: center;
   margin-top: 1rem;
 }
-input {
+input,
+select {
   font-family: 'Nunito', sans-serif;
   font-size: 15px;
   padding: 0.25rem;
   border-radius: 0.5rem;
 }
-.formHelpers input {
+.formHelpers input,
+.formHelpers select {
   margin-left: 0.5rem;
 }
 
@@ -175,19 +181,27 @@ article ul {
   justify-content: space-between;
   align-items: center;
 }
+
 article ul li {
   padding: 0.5rem 1rem;
 }
+
 article button {
   margin-top: 0.2rem;
 }
+
 article button:hover {
   border: 2px solid #dadada;
   border-radius: 7px;
   box-shadow: 0 0 10px #9ecaed;
 }
+
 article button:focus {
   outline: none;
   border-color: #9ecaed;
   box-shadow: 0 0 10px #9ecaed;
+}
+
+.noItemsToDisplay {
+  padding: 1rem;
 }

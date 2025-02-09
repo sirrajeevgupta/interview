@@ -10,16 +10,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const QuestionsList = ({ questionsList }) => {
-  const orderedList = questionsList
-    .slice()
-    .sort((a, b) => b.timeStamp.localeCompare(a.timeStamp));
-  const list = orderedList;
-
   return (
     <section>
-      {list?.length ? (
+      {questionsList?.length ? (
         <ul>
-          {list.map((question) => {
+          {questionsList.map((question) => {
             return (
               <li key={question?._id}>
                 <article key={question?._id}>
@@ -84,8 +79,12 @@ const QuestionsList = ({ questionsList }) => {
           })}
         </ul>
       ) : (
-        <article>
-          <p>No questions to display.</p>
+        <article className='noItemsToDisplay'>
+          <h2>No questions to display.</h2>
+          <br />
+          <p>
+            <Link to='/question'>Let's create one! </Link>
+          </p>
         </article>
       )}
     </section>

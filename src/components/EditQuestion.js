@@ -96,12 +96,38 @@ const EditQuestion = ({ questionsList, setQuestionsList }) => {
             <label>
               <FontAwesomeIcon icon={faCircleChevronDown} /> Domain:
             </label>
-            <input
-              placeholder='Domain'
-              type='text'
+            <select
+              name='domain'
+              id='domain'
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
-            />
+            >
+              <option value='' key={0}></option>
+              <option value='JavaScript' key={1}>
+                JavaScript
+              </option>
+              <option value='ReactJs' key={2}>
+                ReactJs
+              </option>
+              <option value='HTML' key={3}>
+                HTML
+              </option>
+              <option value='CSS' key={4}>
+                CSS
+              </option>
+              <option value='NodeJs' key={5}>
+                NodeJs
+              </option>
+              <option value='MongoDB' key={6}>
+                MongoDB
+              </option>
+              <option value='SASS' key={7}>
+                SASS
+              </option>
+              <option value='Miscellaneous' key={8}>
+                Miscellaneous
+              </option>
+            </select>
           </div>
           <div>
             <label>

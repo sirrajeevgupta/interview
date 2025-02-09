@@ -5,11 +5,14 @@ import EditQuestion from './components/EditQuestion';
 import SingleQuestion from './components/SingleQuestion';
 import Missing from './components/Missing';
 import Layout from './components/Layout';
+import FilterByDomain from './components/FilterByDomain';
 import { useState, useEffect } from 'react';
 import axios from './api/axios';
 
 function App() {
   const [questionsList, setQuestionsList] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const getAllQuestions = async () => {
@@ -25,13 +28,31 @@ function App() {
     getAllQuestions();
   }, []);
 
+  useEffect(() => {
+    const filteredResults = questionsList.filter((question) =>
+      question.question.toLowerCase().includes(search.toLowerCase())
+    );
+    setSearchResults(filteredResults.reverse());
+  }, [search, questionsList]);
+
+  const orderedList = searchResults
+    .slice()
+    .sort((a, b) => b.timeStamp.localeCompare(a.timeStamp));
+
   return (
     <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route
-          index
-          element={<QuestionsList questionsList={questionsList} />}
-        />
+      <Route
+        path='/'
+        element={
+          <Layout
+            search={search}
+            setSearch={setSearch}
+            searchResults={searchResults}
+            setSearchResults={setSearchResults}
+          />
+        }
+      >
+        <Route index element={<QuestionsList questionsList={orderedList} />} />
         <Route path='question'>
           <Route
             index
@@ -61,6 +82,7 @@ function App() {
             }
           />
         </Route>
+        <Route path='domains' element={<FilterByDomain />}></Route>
       </Route>
       <Route path='*' element={<Missing />} />
     </Routes>
