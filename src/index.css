@@ -17,6 +17,13 @@ body {
   height: 100vh;
 }
 
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 header,
 footer {
   background-color: #000;
@@ -47,6 +54,7 @@ nav {
 
 nav input {
   width: 40%;
+  font-size: 18px;
 }
 nav ul {
   width: 100%;
@@ -65,31 +73,36 @@ a:visited {
   text-decoration: none;
 }
 
-.App {
+section {
+  background-color: #333;
+  width: 100%;
+  margin-top: 2.3rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-section {
-  background-color: #333;
-  width: 100%;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  padding: 0.5rem;
-}
-
 article {
   background-color: #000;
   border-radius: 0.5rem;
   margin: 23px 20px;
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+}
+
+article h3:hover {
+  text-decoration: underline 2px;
+  color: #fff;
 }
 
 .questionSet {
   padding: 0.6rem;
   background-color: grey;
-  color: black;
+  color: #fff;
   border-bottom: 2px solid #fff;
   border-top-right-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
@@ -114,6 +127,8 @@ article {
 }
 
 form {
+  width: 80%;
+  height: 80vh;
   margin-inline: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -134,7 +149,6 @@ label,
 button {
   font-weight: bold;
   margin-top: 1rem;
-  margin-bottom: 0.3rem;
 }
 
 button {
@@ -204,4 +218,7 @@ article button:focus {
 
 .noItemsToDisplay {
   padding: 1rem;
+}
+
+.domains {
 }
