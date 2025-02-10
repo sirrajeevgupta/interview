@@ -59,7 +59,6 @@ nav input {
   padding: 0.25rem;
   border-radius: 0.5rem;
 }
-
 nav ul {
   width: 100%;
   display: flex;
@@ -91,8 +90,9 @@ section {
 
 article {
   background-color: #000;
+  min-width: 94vw;
   border-radius: 0.5rem;
-  margin: 23px 20px;
+  margin: 23px 20px 28px 20px;
   outline: none;
   border-color: #9ecaed;
   box-shadow: 0 0 10px #9ecaed;
@@ -160,12 +160,14 @@ form button {
   margin-top: 3rem;
   font-size: 15px;
 }
+
 .formHelpers {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 1rem;
 }
+
 form input,
 form select {
   font-family: 'Nunito', sans-serif;
@@ -174,6 +176,7 @@ form select {
   border-radius: 0.5rem;
   margin-bottom: 1rem;
 }
+
 .formHelpers input,
 .formHelpers select {
   margin-left: 0.5rem;
@@ -181,7 +184,7 @@ form select {
 
 .snippet {
   margin: 1.5rem 2rem 1rem 2rem;
-  font-size: 12px;
+  font-size: 14px;
   border: 1px solid #fff;
   border-radius: 0.5rem;
   color: #fff;

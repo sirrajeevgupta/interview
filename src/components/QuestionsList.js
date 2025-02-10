@@ -3,11 +3,7 @@ import { Link } from 'react-router-dom';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCircleQuestion,
-  faComment,
-  faLink,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCircleQuestion, faLink } from '@fortawesome/free-solid-svg-icons';
 
 const QuestionsList = ({ questionsList }) => {
   return (
@@ -28,9 +24,27 @@ const QuestionsList = ({ questionsList }) => {
                   </div>
                   <div className='answerSet'>
                     <div className='mainAnswer'>
-                      <p>
-                        <FontAwesomeIcon icon={faComment} /> {question?.answer}
-                      </p>
+                      <div>
+                        <SyntaxHighlighter
+                          lineProps={{
+                            style: {
+                              wordBreak: 'break-all',
+                              whiteSpace: 'pre-wrap',
+                            },
+                          }}
+                          customStyle={{
+                            backgroundColor: '#000',
+                            margin: 0,
+                            padding: 0,
+                            fontFamily: 'Nunito',
+                          }}
+                          wrapLines={true}
+                          language='xml'
+                          style={atomDark}
+                        >
+                          {question?.answer}
+                        </SyntaxHighlighter>
+                      </div>
                       <div
                         className={`snippet ${
                           question?.codeSnippet?.length

@@ -22,11 +22,7 @@ const DomainQuestions = () => {
     getQuestionsByDomain();
   }, [domain]);
 
-  return (
-    <section>
-      <QuestionsList questionsList={domianQuestions} />
-    </section>
-  );
+  return <QuestionsList questionsList={domianQuestions} />;
 };
 
 export default DomainQuestions;

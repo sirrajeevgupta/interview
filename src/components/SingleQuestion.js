@@ -6,7 +6,6 @@ import { formatDistanceToNow, parseISO } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleQuestion,
-  faComment,
   faLink,
   faTrashCan,
   faPenToSquare,
@@ -44,9 +43,24 @@ const SingleQuestion = ({ questionsList, setQuestionsList }) => {
         </div>
         <div className='answerSet'>
           <div className='mainAnswer'>
-            <p>
-              <FontAwesomeIcon icon={faComment} /> {singleQuestion?.answer}
-            </p>
+            <div>
+              <SyntaxHighlighter
+                lineProps={{
+                  style: { wordBreak: 'break-all', whiteSpace: 'pre-wrap' },
+                }}
+                customStyle={{
+                  backgroundColor: '#000',
+                  margin: 0,
+                  padding: 0,
+                  fontFamily: 'Nunito',
+                }}
+                wrapLines={true}
+                language='xml'
+                style={atomDark}
+              >
+                {singleQuestion?.answer}
+              </SyntaxHighlighter>
+            </div>
             <div
               className={`snippet ${
                 singleQuestion?.codeSnippet?.length ? 'visible' : 'hideSnippet'
