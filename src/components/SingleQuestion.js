@@ -89,11 +89,9 @@ const SingleQuestion = ({ questionsList, setQuestionsList }) => {
             </Link>
           </li>
           <li>
-            <Link>
-              <button onClick={() => handleDelete()}>
-                <FontAwesomeIcon icon={faTrashCan} />
-              </button>
-            </Link>
+            <button onClick={() => handleDelete()}>
+              <FontAwesomeIcon icon={faTrashCan} />
+            </button>
           </li>
         </ul>
       </article>

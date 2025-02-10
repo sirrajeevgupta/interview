@@ -54,8 +54,12 @@ nav {
 
 nav input {
   width: 40%;
-  font-size: 18px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
 }
+
 nav ul {
   width: 100%;
   display: flex;
@@ -144,16 +148,16 @@ button {
 }
 textarea {
   font-size: 35px;
+  margin-bottom: 1rem;
 }
 label,
 button {
   font-weight: bold;
-  margin-top: 1rem;
 }
 
-button {
+form button {
   padding: 0.5rem;
-  margin-top: 1rem;
+  margin-top: 3rem;
   font-size: 15px;
 }
 .formHelpers {
@@ -162,12 +166,13 @@ button {
   align-items: center;
   margin-top: 1rem;
 }
-input,
-select {
+form input,
+form select {
   font-family: 'Nunito', sans-serif;
   font-size: 15px;
   padding: 0.25rem;
   border-radius: 0.5rem;
+  margin-bottom: 1rem;
 }
 .formHelpers input,
 .formHelpers select {
@@ -221,4 +226,23 @@ article button:focus {
 }
 
 .domains {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.domains li {
+  border: 1px solid white;
+  margin: 0.7rem;
+  padding: 0.7rem;
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  background-color: #000;
+  box-shadow: 0 0 10px #fff;
+  font-size: 15px;
+  font-weight: bold;
 }

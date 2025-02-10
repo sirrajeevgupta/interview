@@ -6,25 +6,25 @@ const FilterByDomain = () => {
     <section>
       <ul className='domains'>
         <li>
-          <Link>JavaScript</Link>
+          <Link to='/domains/JavaScript'>JavaScript</Link>
         </li>
         <li>
-          <Link>ReactJs</Link>
+          <Link to='/domains/ReactJs'>ReactJs</Link>
         </li>
         <li>
-          <Link>NodeJs</Link>
+          <Link to='/domains/NodeJs'>NodeJs</Link>
         </li>
         <li>
-          <Link>HTML</Link>
+          <Link to='/domains/HTML'>HTML</Link>
         </li>
         <li>
-          <Link>CSS</Link>
+          <Link to='/domains/CSS'>CSS</Link>
         </li>
         <li>
-          <Link>SASS</Link>
+          <Link to='/domains/SASS'>SASS</Link>
         </li>
         <li>
-          <Link>Miscellaneous</Link>
+          <Link to='/domains/Miscellaneous'>Miscellaneous</Link>
         </li>
       </ul>
     </section>
