@@ -89,7 +89,7 @@ section {
 }
 
 article {
-  background-color: #000;
+  background-color: rgb(40, 40, 40);
   min-width: 94vw;
   border-radius: 0.5rem;
   margin: 23px 20px 28px 20px;
@@ -139,6 +139,14 @@ form {
   justify-content: space-evenly;
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+}
+
 textarea,
 button {
   font-family: 'Nunito', sans-serif;
@@ -147,8 +155,9 @@ button {
   border-radius: 0.5rem;
 }
 textarea {
-  font-size: 35px;
+  height: 180px;
   margin-bottom: 1rem;
+  font-size: 15px;
 }
 label,
 button {
@@ -248,4 +257,11 @@ article button:focus {
   box-shadow: 0 0 10px #fff;
   font-size: 15px;
   font-weight: bold;
+}
+
+.headerIcon {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

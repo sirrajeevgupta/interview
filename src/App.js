@@ -7,89 +7,27 @@ import Missing from './components/Missing';
 import Layout from './components/Layout';
 import FilterByDomain from './components/FilterByDomain';
 import DomainQuestions from './components/DomainQuestions';
-import { useState, useEffect } from 'react';
-import axios from './api/axios';
+import { DataProvider } from './context/DataContext';
 
 function App() {
-  const [questionsList, setQuestionsList] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
-  const [search, setSearch] = useState('');
-
-  useEffect(() => {
-    const getAllQuestions = async () => {
-      try {
-        const response = await axios.get('/questions');
-        console.log(response.data);
-        if (response?.data) setQuestionsList(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    getAllQuestions();
-  }, []);
-
-  useEffect(() => {
-    const filteredResults = questionsList.filter((question) =>
-      question.question.toLowerCase().includes(search.toLowerCase())
-    );
-    setSearchResults(filteredResults.reverse());
-  }, [search, questionsList]);
-
-  const orderedList = searchResults
-    .slice()
-    .sort((a, b) => b.timeStamp.localeCompare(a.timeStamp));
-
   return (
-    <Routes>
-      <Route
-        path='/'
-        element={
-          <Layout
-            search={search}
-            setSearch={setSearch}
-            searchResults={searchResults}
-            setSearchResults={setSearchResults}
-          />
-        }
-      >
-        <Route index element={<QuestionsList questionsList={orderedList} />} />
-        <Route path='question'>
-          <Route
-            index
-            element={
-              <AddQuestion
-                questionsList={questionsList}
-                setQuestionsList={setQuestionsList}
-              />
-            }
-          />
-          <Route
-            path=':id'
-            element={
-              <SingleQuestion
-                questionsList={questionsList}
-                setQuestionsList={setQuestionsList}
-              />
-            }
-          />
-          <Route
-            path='edit/:id'
-            element={
-              <EditQuestion
-                questionsList={questionsList}
-                setQuestionsList={setQuestionsList}
-              />
-            }
-          />
+    <DataProvider>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<QuestionsList />} />
+          <Route path='question'>
+            <Route index element={<AddQuestion />} />
+            <Route path=':id' element={<SingleQuestion />} />
+            <Route path='edit/:id' element={<EditQuestion />} />
+          </Route>
+          <Route path='domains'>
+            <Route index element={<FilterByDomain />} />
+            <Route path=':domain' element={<DomainQuestions />} />
+          </Route>
         </Route>
-        <Route path='domains'>
-          <Route index element={<FilterByDomain />} />
-          <Route path=':domain' element={<DomainQuestions />}></Route>
-        </Route>
-      </Route>
-      <Route path='*' element={<Missing />} />
-    </Routes>
+        <Route path='*' element={<Missing />} />
+      </Routes>
+    </DataProvider>
   );
 }
 

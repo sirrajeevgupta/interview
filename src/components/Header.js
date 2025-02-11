@@ -1,6 +1,13 @@
 import { Link } from 'react-router-dom';
+import useWindowSize from '../hooks/useWindowSize';
+import { FaLaptop, FaMobileAlt, FaTabletAlt } from 'react-icons/fa';
+import { useContext } from 'react';
+import DataContext from '../context/DataContext';
 
-const Header = ({ search, setSearch }) => {
+const Header = () => {
+  const { search, setSearch } = useContext(DataContext);
+  const { width } = useWindowSize();
+
   return (
     <header>
       <nav>
@@ -22,6 +29,15 @@ const Header = ({ search, setSearch }) => {
             <Link to='/domains'>Search by Domains</Link>
           </li>
         </ul>
+        <span className='headerIcon'>
+          {width > 992 ? (
+            <FaLaptop />
+          ) : width < 762 ? (
+            <FaMobileAlt />
+          ) : (
+            <FaTabletAlt />
+          )}
+        </span>
       </nav>
     </header>
   );

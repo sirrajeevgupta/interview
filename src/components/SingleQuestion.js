@@ -10,8 +10,12 @@ import {
   faTrashCan,
   faPenToSquare,
 } from '@fortawesome/free-solid-svg-icons';
+import { useContext } from 'react';
+import DataContext from '../context/DataContext';
 
-const SingleQuestion = ({ questionsList, setQuestionsList }) => {
+const SingleQuestion = () => {
+  const { questionsList, setQuestionsList } = useContext(DataContext);
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -49,7 +53,7 @@ const SingleQuestion = ({ questionsList, setQuestionsList }) => {
                   style: { wordBreak: 'break-all', whiteSpace: 'pre-wrap' },
                 }}
                 customStyle={{
-                  backgroundColor: '#000',
+                  backgroundColor: 'rgb(40, 40, 40)',
                   margin: 0,
                   padding: 0,
                   fontFamily: 'Nunito',

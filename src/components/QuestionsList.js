@@ -4,13 +4,16 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleQuestion, faLink } from '@fortawesome/free-solid-svg-icons';
+import { useContext } from 'react';
+import DataContext from '../context/DataContext';
 
-const QuestionsList = ({ questionsList }) => {
+const QuestionsList = () => {
+  const { orderedList } = useContext(DataContext);
   return (
     <section>
-      {questionsList?.length ? (
+      {orderedList?.length ? (
         <ul>
-          {questionsList.map((question) => {
+          {orderedList.map((question) => {
             return (
               <li key={question?._id}>
                 <article key={question?._id}>
@@ -33,7 +36,7 @@ const QuestionsList = ({ questionsList }) => {
                             },
                           }}
                           customStyle={{
-                            backgroundColor: '#000',
+                            backgroundColor: 'rgb(40, 40, 40)',
                             margin: 0,
                             padding: 0,
                             fontFamily: 'Nunito',

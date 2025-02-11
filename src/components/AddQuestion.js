@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import axios from '../api/axios';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,8 +9,11 @@ import {
   faCode,
   faCircleChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
+import DataContext from '../context/DataContext';
 
-const AddQuestion = ({ questionsList, setQuestionsList }) => {
+const AddQuestion = () => {
+  const { questionsList, setQuestionsList } = useContext(DataContext);
+
   const navigate = useNavigate();
   const quesRef = useRef();
 

@@ -9,8 +9,12 @@ import {
   faCode,
   faCircleChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
+import { useContext } from 'react';
+import DataContext from '../context/DataContext';
 
-const EditQuestion = ({ questionsList, setQuestionsList }) => {
+const EditQuestion = () => {
+  const { questionsList, setQuestionsList } = useContext(DataContext);
+
   const { id } = useParams();
   const navigate = useNavigate();
 
