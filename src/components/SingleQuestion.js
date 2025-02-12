@@ -50,7 +50,10 @@ const SingleQuestion = () => {
             <div>
               <SyntaxHighlighter
                 lineProps={{
-                  style: { wordBreak: 'break-all', whiteSpace: 'pre-wrap' },
+                  style: {
+                    wordBreak: 'break-all',
+                    whiteSpace: 'pre-wrap',
+                  },
                 }}
                 customStyle={{
                   backgroundColor: 'rgb(40, 40, 40)',
