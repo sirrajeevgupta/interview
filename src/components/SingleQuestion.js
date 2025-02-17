@@ -1,7 +1,6 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import axios from '../api/axios';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -10,30 +9,22 @@ import {
   faTrashCan,
   faPenToSquare,
 } from '@fortawesome/free-solid-svg-icons';
-import { useContext } from 'react';
-import DataContext from '../context/DataContext';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  deleteQuestion,
+  getSingleQuestion,
+} from '../features/questions/questionsSlice';
 
 const SingleQuestion = () => {
-  const { questionsList, setQuestionsList } = useContext(DataContext);
-
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const singleQuestion = questionsList.find((question) => question._id === id);
+  const singleQuestion = useSelector((state) => getSingleQuestion(state, id));
 
   const handleDelete = async () => {
-    try {
-      const response = await axios.delete(`questions/${id}`);
-      console.log(response?.data);
-      const filteredList = questionsList.filter(
-        (question) => question._id !== id
-      );
-      setQuestionsList(filteredList);
-      navigate('/');
-    } catch (err) {
-      console.log(err?.response?.data?.message);
-      console.log(err?.response);
-    }
+    dispatch(deleteQuestion(id)).unwrap();
+    navigate('/');
   };
 
   return (

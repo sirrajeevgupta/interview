@@ -7,27 +7,24 @@ import Missing from './components/Missing';
 import Layout from './components/Layout';
 import FilterByDomain from './components/FilterByDomain';
 import DomainQuestions from './components/DomainQuestions';
-import { DataProvider } from './context/DataContext';
 
 function App() {
   return (
-    <DataProvider>
-      <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route index element={<QuestionsList />} />
-          <Route path='question'>
-            <Route index element={<AddQuestion />} />
-            <Route path=':id' element={<SingleQuestion />} />
-            <Route path='edit/:id' element={<EditQuestion />} />
-          </Route>
-          <Route path='domains'>
-            <Route index element={<FilterByDomain />} />
-            <Route path=':domain' element={<DomainQuestions />} />
-          </Route>
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route index element={<QuestionsList />} />
+        <Route path='question'>
+          <Route index element={<AddQuestion />} />
+          <Route path=':id' element={<SingleQuestion />} />
+          <Route path='edit/:id' element={<EditQuestion />} />
         </Route>
-        <Route path='*' element={<Missing />} />
-      </Routes>
-    </DataProvider>
+        <Route path='domains'>
+          <Route index element={<FilterByDomain />} />
+          <Route path=':domain' element={<DomainQuestions />} />
+        </Route>
+      </Route>
+      <Route path='*' element={<Missing />} />
+    </Routes>
   );
 }
 

@@ -1,5 +1,4 @@
-import { useState, useRef, useEffect, useContext } from 'react';
-import axios from '../api/axios';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -9,10 +8,11 @@ import {
   faCode,
   faCircleChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
-import DataContext from '../context/DataContext';
+import { useDispatch } from 'react-redux';
+import { addQuestion } from '../features/questions/questionsSlice';
 
 const AddQuestion = () => {
-  const { questionsList, setQuestionsList } = useContext(DataContext);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const quesRef = useRef();
@@ -39,21 +39,15 @@ const AddQuestion = () => {
         referenceUrl: referenceUrl,
         timeStamp: new Date().toISOString(),
       };
-      try {
-        const response = await axios.post('questions', newQuestion);
-        console.log(response.data);
-        console.log(response);
-        setQuestion('');
-        setAnswer('');
-        setCodeSnippet('');
-        setDomain('');
-        setReferenceUrl('');
-        const newQuestionList = [...questionsList, response.data];
-        setQuestionsList(newQuestionList);
-        navigate('/');
-      } catch (err) {
-        console.log(err.response?.data);
-      }
+
+      dispatch(addQuestion(newQuestion)).unwrap();
+      setQuestion('');
+      setAnswer('');
+      setCodeSnippet('');
+      setDomain('');
+      setReferenceUrl('');
+
+      navigate('/');
     }
   };
 
@@ -95,15 +89,10 @@ const AddQuestion = () => {
             <label>
               <FontAwesomeIcon icon={faCircleChevronDown} /> Domain:
             </label>
-            {/*             <input
-              placeholder='Domain'
-              type='text'
-              value={domain}
-              onChange={(e) => setDomain(e.target.value)}
-            /> */}
             <select
               name='domain'
               id='domain'
+              defaultValue='Miscellaneous'
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
             >

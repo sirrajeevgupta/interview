@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import axios from '../api/axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleQuestion,
@@ -9,16 +8,18 @@ import {
   faCode,
   faCircleChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
-import { useContext } from 'react';
-import DataContext from '../context/DataContext';
+import {
+  getSingleQuestion,
+  editQuestion,
+} from '../features/questions/questionsSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const EditQuestion = () => {
-  const { questionsList, setQuestionsList } = useContext(DataContext);
-
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const singleQuestion = questionsList?.find((question) => question._id === id);
+  const singleQuestion = useSelector((state) => getSingleQuestion(state, id));
 
   const [question, setQuestion] = useState(singleQuestion?.question);
   const [answer, setAnswer] = useState(singleQuestion?.answer);
@@ -41,24 +42,14 @@ const EditQuestion = () => {
         referenceUrl: referenceUrl,
         timeStamp: new Date().toISOString(),
       };
-      try {
-        const response = await axios.put('questions', updatedQuestion);
-        console.log(response.data);
-        console.log(response);
-        setQuestion('');
-        setAnswer('');
-        setCodeSnippet('');
-        setDomain('');
-        setReferenceUrl('');
-        const filteredList = questionsList.filter(
-          (question) => question._id !== id
-        );
-        setQuestionsList([...filteredList, response.data]);
-        navigate(`/question/${id}`);
-      } catch (err) {
-        console.log(err.response?.data?.message);
-        alert(err.response?.data?.message);
-      }
+
+      dispatch(editQuestion(updatedQuestion)).unwrap();
+      setQuestion('');
+      setAnswer('');
+      setCodeSnippet('');
+      setDomain('');
+      setReferenceUrl('');
+      navigate(`/question/${id}`);
     }
   };
 
