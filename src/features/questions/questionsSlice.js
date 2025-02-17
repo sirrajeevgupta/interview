@@ -21,6 +21,19 @@ export const fetchQuestions = createAsyncThunk(
   }
 );
 
+export const fetchDomainQuestions = createAsyncThunk(
+  'questions/fetchDomainQuestions',
+  async (domain) => {
+    try {
+      const response = await axios.get(`${QUESTIONS_URL}/domains/${domain}`);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  }
+);
+
 export const addQuestion = createAsyncThunk(
   'questions/addQuestion',
   async (question) => {
@@ -89,6 +102,18 @@ const questionsSlice = createSlice({
       state.questions = state.questions.filter(
         (question) => question._id !== action.payload._id
       );
+    });
+
+    builder.addCase(fetchDomainQuestions.pending, (state, action) => {
+      state.status = 'loading';
+    });
+    builder.addCase(fetchDomainQuestions.fulfilled, (state, action) => {
+      state.status = 'success';
+      state.questions = action.payload;
+    });
+    builder.addCase(fetchDomainQuestions.rejected, (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message;
     });
   },
 });

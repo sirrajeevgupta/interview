@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import EmptyQuestionList from './EmptyQuestionList';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import QuestionExcerpt from '../features/questions/QuestionExcerpt';
@@ -32,15 +32,9 @@ const QuestionsList = () => {
         })}
       </ul>
     ) : (
-      <article className='noItemsToDisplay'>
-        <h2>No questions to display.</h2>
-        <br />
-        <p>
-          <Link to='/question'>Let's create one! </Link>
-        </p>
-      </article>
+      <EmptyQuestionList />
     );
-  } else if (status === 'error') {
+  } else if (status === 'failed') {
     content = error;
   }
   return <section>{content}</section>;

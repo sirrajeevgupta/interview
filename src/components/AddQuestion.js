@@ -92,7 +92,6 @@ const AddQuestion = () => {
             <select
               name='domain'
               id='domain'
-              defaultValue='Miscellaneous'
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
             >
