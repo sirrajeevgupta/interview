@@ -29,7 +29,7 @@ const QuestionsList = () => {
       .slice()
       .sort((a, b) => b.timeStamp.localeCompare(a.timeStamp));
 
-    content = questions?.length ? (
+    content = orderedList?.length ? (
       <ul>
         {orderedList.map((question) => {
           return <QuestionExcerpt key={question?._id} question={question} />;
