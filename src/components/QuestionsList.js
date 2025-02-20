@@ -25,9 +25,13 @@ const QuestionsList = () => {
   if (status === 'loading') {
     content = 'Loading Questions...';
   } else if (status === 'success') {
+    const orderedList = questions
+      .slice()
+      .sort((a, b) => b.timeStamp.localeCompare(a.timeStamp));
+
     content = questions?.length ? (
       <ul>
-        {questions.map((question) => {
+        {orderedList.map((question) => {
           return <QuestionExcerpt key={question?._id} question={question} />;
         })}
       </ul>
