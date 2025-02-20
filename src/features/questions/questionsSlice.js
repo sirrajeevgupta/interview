@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-const QUESTIONS_URL = 'http://localhost:3500/questions';
+const QUESTIONS_URL = 'https://interviewapi.onrender.com/questions';
 
 const initialState = {
   questions: [],
