@@ -1,12 +1,26 @@
 import { Link } from 'react-router-dom';
 import useWindowSize from '../hooks/useWindowSize';
 import { FaLaptop, FaMobileAlt, FaTabletAlt } from 'react-icons/fa';
-import { useContext } from 'react';
-import DataContext from '../context/DataContext';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  getAllQuestions,
+  searchedQuestions,
+} from '../features/questions/questionsSlice';
 
 const Header = () => {
-  const { search, setSearch } = useContext(DataContext);
+  const dispatch = useDispatch();
+
+  const questions = useSelector(getAllQuestions);
+  const [search, setSearch] = useState('');
   const { width } = useWindowSize();
+
+  useEffect(() => {
+    const filteredResults = questions.filter((question) =>
+      question.question.toLowerCase().includes(search.toLowerCase())
+    );
+    dispatch(searchedQuestions(filteredResults));
+  }, [search, questions, dispatch]);
 
   return (
     <header>

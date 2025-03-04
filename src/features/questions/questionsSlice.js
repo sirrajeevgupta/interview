@@ -6,6 +6,7 @@ const initialState = {
   questions: [],
   status: 'idle',
   error: '',
+  searchResults: [],
 };
 
 export const fetchQuestions = createAsyncThunk(
@@ -73,7 +74,11 @@ export const deleteQuestion = createAsyncThunk(
 const questionsSlice = createSlice({
   name: 'questions',
   initialState,
-  reducers: {},
+  reducers: {
+    searchedQuestions: (state, action) => {
+      state.searchResults = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder.addCase(fetchQuestions.pending, (state, action) => {
       state.status = 'loading';
@@ -123,5 +128,8 @@ export const getQuestionsStatus = (state) => state.questions.status;
 export const getQuestionsError = (state) => state.questions.error;
 export const getSingleQuestion = (state, id) =>
   state.questions.questions.find((question) => question._id === id);
+export const getSearchResults = (state) => state.questions.searchResults;
+
+export const { searchedQuestions } = questionsSlice.actions;
 
 export default questionsSlice.reducer;

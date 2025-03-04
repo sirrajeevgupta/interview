@@ -7,14 +7,16 @@ import {
   getAllQuestions,
   getQuestionsStatus,
   getQuestionsError,
+  getSearchResults,
 } from '../features/questions/questionsSlice';
 
 const QuestionsList = () => {
   const dispatch = useDispatch();
 
-  const questions = useSelector(getAllQuestions);
+  //const questions = useSelector(getAllQuestions);
   const status = useSelector(getQuestionsStatus);
   const error = useSelector(getQuestionsError);
+  const searchResults = useSelector(getSearchResults);
 
   useEffect(() => {
     dispatch(fetchQuestions());
@@ -25,7 +27,7 @@ const QuestionsList = () => {
   if (status === 'loading') {
     content = 'Loading Questions...';
   } else if (status === 'success') {
-    const orderedList = questions
+    const orderedList = searchResults
       .slice()
       .sort((a, b) => b.timeStamp.localeCompare(a.timeStamp));
 
