@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import QuestionExcerpt from '../features/questions/QuestionExcerpt';
 import {
   fetchQuestions,
-  getAllQuestions,
   getQuestionsStatus,
   getQuestionsError,
   getSearchResults,
